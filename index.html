@@ -58,9 +58,15 @@
     [aria-pressed="true"]{color:#0f172a}
     .seg-affix{position:sticky;top:72px;z-index:15;transform:translateY(-6px);opacity:0;pointer-events:none;transition:opacity .28s ease,transform .28s cubic-bezier(.2,.8,.2,1)}
     .seg-affix.on{opacity:1;transform:none;pointer-events:auto}
-    .project-card{position:relative;overflow:hidden}
-    .project-card .p-4{position:absolute;left:0;right:0;bottom:0;padding:16px 16px 14px;color:#fff;background:linear-gradient(to top,rgba(0,0,0,.64),rgba(0,0,0,0));backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);pointer-events:none;min-height:88px}
-    .project-card .p-4 h3{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+    .project-card{position:relative;overflow:hidden;cursor:pointer}
+    .project-card .thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#020617}
+    .project-card .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+    .project-card:hover .thumb img{transform:scale(1.05)}
+    .project-card .play-icon{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:9999px;background:rgba(15,23,42,.72);border:1px solid rgba(255,255,255,.22);display:grid;place-items:center;color:#fff;box-shadow:0 16px 30px rgba(2,6,23,.55);transition:transform .28s ease,opacity .28s ease;opacity:.92}
+    .project-card .play-icon::before{content:"";border-style:solid;border-width:9px 0 9px 14px;border-color:transparent transparent transparent currentColor;margin-left:3px}
+    .project-card:hover .play-icon{transform:translate(-50%,-50%) scale(1.1);opacity:1}
+    .project-card .p-4{position:absolute;left:0;right:0;bottom:0;padding:16px 16px 14px;color:#fff;background:linear-gradient(180deg,rgba(2,6,23,0) 0%,rgba(2,6,23,.78) 58%,rgba(2,6,23,.92) 100%);pointer-events:none;min-height:88px}
+    .project-card .p-4 h3{color:#fff;text-shadow:0 2px 8px rgba(2,6,23,.55)}
     .project-card .p-4 p{opacity:.96;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
     .glass{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.20)}
     .dark .glass{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14)}
@@ -190,18 +196,48 @@
         <p class="mt-3 text-base md:text-lg text-slate-600 dark:text-slate-300">所有作品皆由我獨立完成（剪輯／動態／節奏掌控）。向下捲動選擇想看的作品，點擊即播放。</p>
       </div>
       <div id="projSentinel" class="h-6"></div>
-      <div class="seg seg-affix hidden sm:inline-flex" id="projSeg" role="tablist" aria-label="作品分類">
+      <div class="seg seg-affix" id="projSeg" role="tablist" aria-label="作品分類">
         <div class="seg-thumb"></div>
         <button type="button" data-filter="all" role="tab" aria-pressed="true">全部</button>
         <button type="button" data-filter="edit" role="tab" aria-pressed="false">剪輯</button>
         <button type="button" data-filter="mg" role="tab" aria-pressed="false">MG</button>
       </div>
       <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center" id="projGrid">
-        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit"><div class="w-full overflow-hidden" style="aspect-ratio:16/9"><iframe class="w-full h-full" src="https://www.youtube.com/embed/pVnjSYdQan0?rel=0&modestbranding=1" title="YouTube video" allowfullscreen loading="lazy"></iframe></div><div class="p-4"><h3 class="font-semibold">剪輯作品 #1</h3><p class="mt-1 text-sm">節奏導向的敘事剪輯；以轉場與字幕節點維持注意力。</p></div></article>
-        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit"><div class="w-full overflow-hidden" style="aspect-ratio:16/9"><iframe class="w-full h-full" src="https://www.youtube.com/embed/2JnOENty5Mo?rel=0&modestbranding=1" title="YouTube video" allowfullscreen loading="lazy"></iframe></div><div class="p-4"><h3 class="font-semibold">剪輯作品 #2</h3><p class="mt-1 text-sm">字幕節奏與圖像呼應；以呼吸點安排畫面密度。</p></div></article>
-        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit"><div class="w-full overflow-hidden" style="aspect-ratio:16/9"><iframe class="w-full h-full" src="https://www.youtube.com/embed/1LGenFWpkUQ?rel=0&modestbranding=1" title="YouTube video" allowfullscreen loading="lazy"></iframe></div><div class="p-4"><h3 class="font-semibold">剪輯作品 #3</h3><p class="mt-1 text-sm">以節奏與畫面切換重組既有素材。</p></div></article>
-        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit"><div class="w-full overflow-hidden" style="aspect-ratio:16/9"><iframe class="w-full h-full" src="https://www.youtube.com/embed/DDMBZb3JyOI?rel=0&modestbranding=1" title="YouTube video" allowfullscreen loading="lazy"></iframe></div><div class="p-4"><h3 class="font-semibold">剪輯作品 #4</h3><p class="mt-1 text-sm">風格一致與配色協調；以節奏與色彩塑造氛圍。</p></div></article>
-        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal sm:col-span-2 lg:col-span-1" data-cat="mg"><div class="w-full overflow-hidden" style="aspect-ratio:16/9"><iframe class="w-full h-full" src="https://www.youtube.com/embed/QGUXK4yFNrE?rel=0&modestbranding=1" title="YouTube video" allowfullscreen loading="lazy"></iframe></div><div class="p-4"><h3 class="font-semibold">MG 風格開場</h3><p class="mt-1 text-sm">AE 風格模仿：Logo/字卡導入、故障感過門、節奏切換。</p></div></article>
+        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit" data-video="https://www.youtube.com/embed/pVnjSYdQan0?rel=0&modestbranding=1">
+          <div class="thumb">
+            <img src="https://i.ytimg.com/vi/pVnjSYdQan0/hqdefault.jpg" alt="剪輯作品 #1 縮圖" loading="lazy" />
+            <span class="play-icon" aria-hidden="true"></span>
+          </div>
+          <div class="p-4"><h3 class="font-semibold">剪輯作品 #1</h3><p class="mt-1 text-sm">節奏導向的敘事剪輯；以轉場與字幕節點維持注意力。</p></div>
+        </article>
+        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit" data-video="https://www.youtube.com/embed/2JnOENty5Mo?rel=0&modestbranding=1">
+          <div class="thumb">
+            <img src="https://i.ytimg.com/vi/2JnOENty5Mo/hqdefault.jpg" alt="剪輯作品 #2 縮圖" loading="lazy" />
+            <span class="play-icon" aria-hidden="true"></span>
+          </div>
+          <div class="p-4"><h3 class="font-semibold">剪輯作品 #2</h3><p class="mt-1 text-sm">字幕節奏與圖像呼應；以呼吸點安排畫面密度。</p></div>
+        </article>
+        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit" data-video="https://www.youtube.com/embed/1LGenFWpkUQ?rel=0&modestbranding=1">
+          <div class="thumb">
+            <img src="https://i.ytimg.com/vi/1LGenFWpkUQ/hqdefault.jpg" alt="剪輯作品 #3 縮圖" loading="lazy" />
+            <span class="play-icon" aria-hidden="true"></span>
+          </div>
+          <div class="p-4"><h3 class="font-semibold">剪輯作品 #3</h3><p class="mt-1 text-sm">以節奏與畫面切換重組既有素材。</p></div>
+        </article>
+        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal" data-cat="edit" data-video="https://www.youtube.com/embed/DDMBZb3JyOI?rel=0&modestbranding=1">
+          <div class="thumb">
+            <img src="https://i.ytimg.com/vi/DDMBZb3JyOI/hqdefault.jpg" alt="剪輯作品 #4 縮圖" loading="lazy" />
+            <span class="play-icon" aria-hidden="true"></span>
+          </div>
+          <div class="p-4"><h3 class="font-semibold">剪輯作品 #4</h3><p class="mt-1 text-sm">風格一致與配色協調；以節奏與色彩塑造氛圍。</p></div>
+        </article>
+        <article class="group project-card relative rounded-2xl border border-slate-200 dark:border-slate-700 overflow-hidden reveal sm:col-span-2 lg:col-span-1" data-cat="mg" data-video="https://www.youtube.com/embed/QGUXK4yFNrE?rel=0&modestbranding=1">
+          <div class="thumb">
+            <img src="https://i.ytimg.com/vi/QGUXK4yFNrE/hqdefault.jpg" alt="MG 風格開場 縮圖" loading="lazy" />
+            <span class="play-icon" aria-hidden="true"></span>
+          </div>
+          <div class="p-4"><h3 class="font-semibold">MG 風格開場</h3><p class="mt-1 text-sm">AE 風格模仿：Logo/字卡導入、故障感過門、節奏切換。</p></div>
+        </article>
       </div>
     </section>
   </template>
@@ -431,20 +467,35 @@
     const cards = Array.from(grid.querySelectorAll('article.project-card'));
     const btns = Array.from(seg.querySelectorAll('button'));
     const thumb = seg.querySelector('.seg-thumb');
+    let activeCards = cards.slice();
     function updateThumb(btn){
+      if(!thumb || !btn) return;
       const r = btn.getBoundingClientRect();
       const pr = seg.getBoundingClientRect();
       thumb.style.width = r.width + 'px';
       thumb.style.transform = `translateX(${r.left - pr.left}px)`;
     }
     function setFilter(type){
-      btns.forEach(b=> b.setAttribute('aria-pressed', String(b.dataset.filter===type)));
-      updateThumb(btns.find(b=>b.dataset.filter===type));
+      const target = btns.find(b=>b.dataset.filter===type);
+      btns.forEach(b=> b.setAttribute('aria-pressed', String(b===target)));
+      updateThumb(target);
+      const nextActive = [];
       cards.forEach(c=>{
         const show = type==='all' || c.dataset.cat===type;
-        c.style.pointerEvents = show? 'auto':'none';
-        c.animate([{opacity: getComputedStyle(c).opacity||1, transform: getComputedStyle(c).transform==='none'?'none':getComputedStyle(c).transform},{opacity: show?1:0.12, transform: `scale(${show?1:.98})`}],{duration:280,easing:'cubic-bezier(.2,.8,.2,1)',fill:'forwards'});
+        c.dataset.active = show ? 'true' : 'false';
+        c.setAttribute('aria-hidden', show ? 'false' : 'true');
+        c.style.pointerEvents = show ? 'auto' : 'none';
+        if(show) nextActive.push(c);
+        const cs = getComputedStyle(c);
+        const fromOpacity = parseFloat(cs.opacity) || 1;
+        const fromTransform = cs.transform === 'none' ? 'scale(1)' : cs.transform;
+        const to = show ? { opacity: 1, transform: 'scale(1)' } : { opacity: 0.12, transform: 'scale(0.98)' };
+        c.animate([
+          { opacity: fromOpacity, transform: fromTransform },
+          to
+        ], { duration: 280, easing: 'cubic-bezier(.2,.8,.2,1)', fill: 'forwards' });
       });
+      activeCards = nextActive.length ? nextActive : cards;
     }
     btns.forEach(b=> b.addEventListener('click', ()=> setFilter(b.dataset.filter)));
     setFilter('all');
@@ -465,27 +516,56 @@
       document.body.appendChild(v);
       return v;
     }
-    let viewer = null, cur = -1;
-    function openAt(i){
-      if(!viewer) viewer = buildViewer();
-      const list = cards.filter(c=> c.style.opacity==='' || parseFloat(getComputedStyle(c).opacity)>0.5);
-      cur = i;
-      const iframe = viewer.querySelector('iframe');
-      const src = cards[i].querySelector('iframe').src;
-      iframe.src = src;
-      viewer.classList.add('on');
+    let viewer = null;
+    let cur = -1;
+    function ensureViewer(){
+      if(viewer) return viewer;
+      viewer = buildViewer();
       const prev = viewer.querySelector('.prev');
       const next = viewer.querySelector('.next');
       const close = viewer.querySelector('.viewer-close');
-      function nav(dir){ cur = (cur + dir + cards.length) % cards.length; openAt(cur); }
-      prev.onclick = (e)=>{ e.stopPropagation(); nav(-1); };
-      next.onclick = (e)=>{ e.stopPropagation(); nav(1); };
-      close.onclick = ()=>{ viewer.classList.remove('on'); iframe.src=''; };
-      viewer.onclick = (e)=>{ if(e.target===viewer) { viewer.classList.remove('on'); iframe.src=''; } };
-      function onKey(ev){ if(ev.key==='Escape'){ viewer.classList.remove('on'); iframe.src=''; } if(ev.key==='ArrowLeft'){ nav(-1);} if(ev.key==='ArrowRight'){ nav(1);} }
-      document.addEventListener('keydown', onKey, { once:true });
+      prev.addEventListener('click', (e)=>{ e.stopPropagation(); step(-1); });
+      next.addEventListener('click', (e)=>{ e.stopPropagation(); step(1); });
+      close.addEventListener('click', closeViewer);
+      viewer.addEventListener('click', (e)=>{ if(e.target===viewer) closeViewer(); });
+      return viewer;
     }
-    cards.forEach((c,i)=> c.addEventListener('click', ()=> openAt(i)));
+    function presentCurrent(){
+      if(!activeCards.length) return;
+      const v = ensureViewer();
+      const iframe = v.querySelector('iframe');
+      const card = activeCards[cur];
+      if(!card) return;
+      iframe.src = card.dataset.video || '';
+      v.classList.add('on');
+    }
+    function step(dir){
+      if(!activeCards.length) return;
+      cur = (cur + dir + activeCards.length) % activeCards.length;
+      presentCurrent();
+    }
+    function handleKey(ev){
+      if(ev.key==='Escape'){ closeViewer(); }
+      if(ev.key==='ArrowLeft'){ ev.preventDefault(); step(-1); }
+      if(ev.key==='ArrowRight'){ ev.preventDefault(); step(1); }
+    }
+    function closeViewer(){
+      if(!viewer) return;
+      viewer.classList.remove('on');
+      const iframe = viewer.querySelector('iframe');
+      iframe.src = '';
+      document.removeEventListener('keydown', handleKey);
+    }
+    function openCard(card){
+      const visible = cards.filter(c=> c.dataset.active !== 'false');
+      activeCards = visible.length ? visible : cards;
+      cur = activeCards.indexOf(card);
+      if(cur < 0) cur = 0;
+      presentCurrent();
+      document.removeEventListener('keydown', handleKey);
+      document.addEventListener('keydown', handleKey);
+    }
+    cards.forEach((c)=> c.addEventListener('click', ()=> openCard(c)));
   }
   </script>
 </body>
